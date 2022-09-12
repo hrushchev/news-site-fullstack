@@ -53,22 +53,22 @@ class User(AbstractBaseUser):
     def has_module_perms(self, app_label):
         return True
 
-# class Tag(models.Model):
-#     title         = models.CharField(max_length=30, null=False)
+class Tag(models.Model):
+    title           = models.CharField(max_length=30, null=False)
 
-#     def __str__(self):
-#         return self.title
+    def __str__(self):
+        return self.title
 
-# class Post(models.Model):
-#     title         = models.CharField(max_length=30)
-#     content       = models.TextField()
-#     user_id       = models.ForeignKey(User, on_delete=models.CASCADE)
-#     tags          = models.ManyToManyField(Tag)
-#     picture = models.ImageField(max_length=255, 
-#                                 upload_to='media/post_images', 
-#                                 default='media/default_post_image', 
-#                                 null=True, blank=True)
+class Post(models.Model):
+    title           = models.CharField(max_length=30)
+    content         = models.TextField()
+    user_id         = models.ForeignKey(User, on_delete=models.CASCADE, related_name="posts")
+    tags            = models.ManyToManyField(Tag)
+    picture         = models.ImageField(max_length=255, 
+                                        upload_to='media/post_images', 
+                                        default='media/default_post_image', 
+                                        null=True, blank=True)
 
-#     def __str__(self):
-#         return self.title
+    def __str__(self):
+        return self.title
 
